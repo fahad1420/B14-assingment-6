@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import WorkoutCard from "@/components/WorkoutCard";
 import LoadingGrid from "@/components/LoadingGrid";
 
-
+const API_URL = "https://api.abcz.workers.dev/api/fitlog";
 
 export default function WorkoutLibrary() {
   const [workouts, setWorkouts] = useState([]);
@@ -15,7 +15,7 @@ export default function WorkoutLibrary() {
   const loadWorkouts = async (signal) => {
     setStatus("loading");
     try {
-      const response = await fetch("/api/workouts", { signal });
+      const response = await fetch(API_URL, { signal });
       if (!response.ok) throw new Error("Failed to load workouts");
       const data = await response.json();
       setWorkouts(Array.isArray(data) ? data : []);
